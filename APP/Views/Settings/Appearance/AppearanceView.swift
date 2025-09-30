@@ -45,7 +45,7 @@ struct AppearanceView: View {
 				} header: {
 					Text("测试性质")
 				} footer: {
-					Text("重启APP生效。遇到问题联系pxx917144686")
+					Text("重启APP生效")
 				}
 			}
 		}
