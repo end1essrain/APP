@@ -916,7 +916,7 @@ struct DownloadView: SwiftUIView {
         }
     }
     
-private var emptyStateView: some View {
+    private var emptyStateView: some SwiftUIView {
     VStack(spacing: 32) {
         // 图标
         Image("AppLogo")
