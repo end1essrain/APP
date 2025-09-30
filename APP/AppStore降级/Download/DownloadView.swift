@@ -916,65 +916,32 @@ struct DownloadView: SwiftUIView {
         }
     }
     
-    private var emptyStateView: some SwiftUIView {
-        VStack(spacing: 32) {
-            // 图标
-            Image("AppLogo")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 120, height: 120)
-                .cornerRadius(24)
-                .scaleEffect(animateCards ? 1.1 : 1)
-                .opacity(animateCards ? 1 : 0.7)
-                .animation(
-                    Animation.easeInOut(duration: 2).repeatForever(autoreverses: true),
-                    value: animateCards
-                )
-            
-            // 关于代码作者按钮 - 限制宽度的设计
-            Button(action: {
-                guard let url = URL(string: "https://baidu.com/"),
-                    UIApplication.shared.canOpenURL(url) else {
-                    return
-                }
-                UIApplication.shared.open(url)
-            }) {
-                HStack(spacing: 16) {
-                    Text("👉 看看源代码")
-                        .font(.body)
-                        .fontWeight(.medium)
-                        .foregroundColor(.white)
-                }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 8)
-                .background(
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(
-                            LinearGradient(
-                                colors: [Color.blue, Color.purple],
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )
-                        )
-                )
-                .shadow(color: Color.blue.opacity(0.3), radius: 8, x: 0, y: 4)
-            }
-            .buttonStyle(PlainButtonStyle())
-            // 限制最大宽度并居中
-            .frame(maxWidth: 200)  // 设置一个合适的最大宽度
-            .padding(.horizontal, 8)
-            
-            // 空状态文本
-            VStack(spacing: 8) {
-                Text("暂无下载任务")
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.primary)
-            }
+private var emptyStateView: some View {
+    VStack(spacing: 32) {
+        // 图标
+        Image("AppLogo")
+            .resizable()
+            .scaledToFit()
+            .frame(width: 120, height: 120)
+            .cornerRadius(24)
+            .scaleEffect(animateCards ? 1.1 : 1)
+            .opacity(animateCards ? 1 : 0.7)
+            .animation(
+                Animation.easeInOut(duration: 2).repeatForever(autoreverses: true),
+                value: animateCards
+            )
+        
+        // 空状态文本
+        VStack(spacing: 8) {
+            Text("暂无下载任务")
+                .font(.title2)
+                .fontWeight(.semibold)
+                .foregroundColor(.primary)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(.vertical, 32)
     }
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .padding(.vertical, 32)
+}
     
     // MARK: - 应用生命周期管理
     private func handleScenePhaseChange(_ newPhase: ScenePhase) {
