@@ -619,8 +619,8 @@ class SimpleHTTPServer: NSObject, @unchecked Sendable {
                             // 如果跳转成功，3秒后显示成功信息
                             setTimeout(function() {
                                 if (installSuccess) {
-                                    status.innerHTML = '<span class="success">✅ 请查看iPhone桌面~ 遇到问题联系代码作者pxx917144686</span>';
-                                    document.body.innerHTML = '<div class="container fade-in" style="text-align: center; padding: 50px; color: white;"><div class="app-icon">✅</div><h1>安装成功</h1><p>请查看iPhone桌面，应用正在安装中...</p><p style="font-size: 12px; opacity: 0.6;">遇到问题请联系源代码作者 pxx917144686</p></div>';
+                                    status.innerHTML = '<span class="success">✅ 请查看iPhone桌面</span>';
+                                    document.body.innerHTML = '<div class="container fade-in" style="text-align: center; padding: 50px; color: white;"><div class="app-icon">✅</div><h1>安装成功</h1><p>请查看iPhone桌面，应用正在安装中...</p><p style="font-size: 12px; opacity: 0.6;"></p></div>';
                                 }
                             }, 3000);
                             
@@ -933,7 +933,7 @@ struct DownloadView: SwiftUIView {
             
             // 关于代码作者按钮 - 限制宽度的设计
             Button(action: {
-                guard let url = URL(string: "https://github.com/pxx917144686"),
+                guard let url = URL(string: "https://baidu.com/"),
                     UIApplication.shared.canOpenURL(url) else {
                     return
                 }
