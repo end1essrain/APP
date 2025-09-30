@@ -53,7 +53,7 @@ struct AccountView: View {
                                         .font(.title)
                                         .fontWeight(.bold)
                                         .foregroundColor(.primary)
-                                    Text("遇到问题,联系pxx917144686")
+                                    Text("遇到问题,请反馈。")
                                         .font(.body)
                                         .foregroundColor(.secondary)
                                         .multilineTextAlignment(.center)
