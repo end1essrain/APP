@@ -13,7 +13,7 @@ enum TabEnum: String, CaseIterable, Hashable {
 		case .library: 		return "签名"
 		case .settings: 	return "设置"
 		case .certificates:	return "证书"
-		case .appstore:		return "AppStore降级"
+		case .appstore:		return "AppStore"
 		case .downloads:	return "下载任务"
 		case .tfapps:		return "TF版获取"
 		}
