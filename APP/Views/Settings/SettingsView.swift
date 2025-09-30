@@ -1,69 +1,69 @@
 import SwiftUI
 import UIKit
-import Darwin
 
 struct SettingsView: View {
-    private let _githubUrl = "https://baidu.com/"
+    // MARK: - State Properties
     @State private var currentIcon = UIApplication.shared.alternateIconName
     @StateObject private var optionsManager = OptionsManager.shared
     
+    // MARK: - Body
     var body: some View {
         NavigationView {
             Form {
-                _feedback()
-                
                 appearanceSection
                 
                 advancedFeaturesSection
                 
                 resetSection
+                
+                aboutSection
             }
+            .navigationTitle("设置")
         }
     }
 }
 
+// MARK: - Section Views
 extension SettingsView {
-    @ViewBuilder
-    private func _feedback() -> some View {
-        Section {
-            Button("提交反馈", systemImage: "safari") {
-                if let url = URL(string: "\(_githubUrl)/issues") {
-                    UIApplication.shared.open(url)
-                }
-            }
-            Button("看看源代码", systemImage: "safari") {
-                if let url = URL(string: _githubUrl) {
-                    UIApplication.shared.open(url)
-                }
-            }
-        } footer: {
-            Text("有任何问题，或建议，请随时提交。")
-        }
-    }
-
+    
     private var appearanceSection: some View {
-        Section {
+        Section(header: Text("外观")) {
             NavigationLink(destination: AppearanceView().environmentObject(ThemeManager.shared)) {
-                Label("外观", systemImage: "paintbrush")
+                Label("主题与外观", systemImage: "paintbrush")
             }
+            
             NavigationLink(destination: AppIconView(currentIcon: $currentIcon)) {
-                Label("图标", systemImage: "app.badge")
+                HStack {
+                    Label("应用图标", systemImage: "app.badge")
+                    Spacer()
+                    if let currentIcon = currentIcon {
+                        Text(currentIcon.replacingOccurrences(of: "AppIcon-", with: ""))
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    } else {
+                        Text("默认")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
             }
         }
     }
     
-
     private var advancedFeaturesSection: some View {
         Section {
             NavigationLink(destination: CertificatesView()) {
                 Label("证书管理", systemImage: "checkmark.seal")
             }
+            
             NavigationLink(destination: ConfigurationView()) {
                 Label("签名配置", systemImage: "signature")
             }
+            
             NavigationLink(destination: ArchiveView()) {
                 Label("归档设置", systemImage: "archivebox")
             }
+            
             NavigationLink(destination: InstallationView()) {
                 Label("安装选项", systemImage: "arrow.down.circle")
             }
@@ -77,11 +77,38 @@ extension SettingsView {
     private var resetSection: some View {
         Section {
             NavigationLink(destination: ResetView()) {
-                Label("重置", systemImage: "trash")
+                Label("重置应用", systemImage: "trash")
+                    .foregroundColor(.red)
             }
         } footer: {
-            Text("重置应用的源、证书、应用程序和设置。")
+            Text("重置应用的源、证书、应用程序和设置。此操作不可撤销。")
         }
-    }    
+    }
+    
+    private var aboutSection: some View {
+        Section(header: Text("关于")) {
+            HStack {
+                Label("版本", systemImage: "info.circle")
+                Spacer()
+                Text(appVersion)
+                    .foregroundColor(.secondary)
+            }
+        }
+    }
+}
 
+// MARK: - Computed Properties
+extension SettingsView {
+    private var appVersion: String {
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
+        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
+        return "\(version) (\(build))"
+    }
+}
+
+// MARK: - Preview
+struct SettingsView_Previews: PreviewProvider {
+    static var previews: some View {
+        SettingsView()
+    }
 }
