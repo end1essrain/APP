@@ -1367,7 +1367,7 @@ struct SearchView: SwiftUI.View {
                     value: animateCards
                 )
             VStack(spacing: 8) {
-                Text("APP降级")
+                Text("Xsign")
                     .font(.title)
                     .foregroundColor(.primary)
                     .font(.body)
