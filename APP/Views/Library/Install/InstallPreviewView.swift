@@ -85,7 +85,7 @@ struct InstallPreviewView: View {
 		guard isSharing || app.identifier != Bundle.main.bundleIdentifier! || _installationMethod == 1 else {
 			UIAlertController.showAlertWithOk(
 				title: "安装",
-				message: "无法覆盖安装 '\(Bundle.main.name ?? "未知")'，有问题,联系pxx917144686。"
+				message: "无法覆盖安装 '\(Bundle.main.name ?? "未知")'"
 			)
 			return
 		}
